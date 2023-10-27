@@ -25,7 +25,7 @@ public class JwtTokenUtil {
 
     public String generateAccessToken(User user) {
         return Jwts.builder()
-                .subject(user.getUuid() + "," + user.getEmail())
+                .subject(user.uuid() + "," + user.email())
                 .issuer("Piotr Grochowiecki")
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + EXPIRE_DURATION_MILLISECONDS))

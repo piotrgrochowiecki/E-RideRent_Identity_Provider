@@ -1,27 +1,24 @@
 package com.piotrgrochowiecki.eriderent_identity_provider.domain;
 
 import lombok.*;
-import lombok.experimental.FieldDefaults;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
-@Data
 @Builder
-@FieldDefaults(level = AccessLevel.PRIVATE)
-@AllArgsConstructor
-public class User implements UserDetails {
-
-    String uuid;
-
-    String email;
-
-    String password;
+public record User(String uuid,
+                   String email,
+                   String password) implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
+    }
+
+    @Override
+    public String getPassword() {
+        return this.password;
     }
 
     @Override
