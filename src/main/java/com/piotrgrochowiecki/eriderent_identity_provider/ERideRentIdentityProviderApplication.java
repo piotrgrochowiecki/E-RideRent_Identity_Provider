@@ -13,9 +13,4 @@ public class ERideRentIdentityProviderApplication {
         SpringApplication.run(ERideRentIdentityProviderApplication.class, args);
     }
 
-    @Bean
-    public RestTemplate restTemplate(RestTemplateBuilder builder) {
-        return builder.build();
-    }
-
 }
