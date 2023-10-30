@@ -1,7 +1,7 @@
 package com.piotrgrochowiecki.eriderent_identity_provider.api.controller;
 
 import com.piotrgrochowiecki.eriderent_identity_provider.api.dto.AuthenticationResponseDto;
-import com.piotrgrochowiecki.eriderent_identity_provider.api.dto.UserAuthenticateResponseDto;
+import com.piotrgrochowiecki.eriderent_identity_provider.api.dto.UserManagementResponseDto;
 import com.piotrgrochowiecki.eriderent_identity_provider.domain.JwtTokenUtil;
 import com.piotrgrochowiecki.eriderent_identity_provider.domain.User;
 import lombok.AllArgsConstructor;
@@ -23,7 +23,7 @@ public class AuthenticationController {
     private final JwtTokenUtil jwtTokenUtil;
 
     @PostMapping("login")
-    public ResponseEntity<?> login(@RequestBody UserAuthenticateResponseDto userDto) {
+    public ResponseEntity<?> login(@RequestBody UserManagementResponseDto userDto) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(userDto.email(), userDto.password()));
 
