@@ -1,8 +1,9 @@
 package com.piotrgrochowiecki.eriderent_identity_provider.domain.client;
 
 import com.piotrgrochowiecki.eriderent_identity_provider.domain.model.User;
-import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
+
+import java.util.Optional;
 
 public interface UserManagementClient {
 
@@ -10,6 +11,6 @@ public interface UserManagementClient {
 
     User getByEmail(@Nullable String email);
 
-    ResponseEntity<?> getByEmailUsingWebClient(String email);
+    Optional<User> getByEmailUsingWebClient(String email);
 
 }
