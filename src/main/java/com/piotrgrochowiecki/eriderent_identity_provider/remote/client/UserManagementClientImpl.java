@@ -1,7 +1,7 @@
-package com.piotrgrochowiecki.eriderent_identity_provider.api.client;
+package com.piotrgrochowiecki.eriderent_identity_provider.remote.client;
 
-import com.piotrgrochowiecki.eriderent_identity_provider.api.mapper.Mapper;
-import com.piotrgrochowiecki.eriderent_identity_provider.api.dto.UserManagementResponseDto;
+import com.piotrgrochowiecki.eriderent_identity_provider.remote.mapper.Mapper;
+import com.piotrgrochowiecki.eriderent_identity_provider.remote.dto.UserManagementResponseDto;
 import com.piotrgrochowiecki.eriderent_identity_provider.domain.model.User;
 import com.piotrgrochowiecki.eriderent_identity_provider.domain.client.UserManagementClient;
 import lombok.AllArgsConstructor;

@@ -1,7 +1,7 @@
-package com.piotrgrochowiecki.eriderent_identity_provider.api.controller;
+package com.piotrgrochowiecki.eriderent_identity_provider.remote.controller;
 
-import com.piotrgrochowiecki.eriderent_identity_provider.api.dto.AuthenticationResponseDto;
-import com.piotrgrochowiecki.eriderent_identity_provider.api.dto.UserManagementResponseDto;
+import com.piotrgrochowiecki.eriderent_identity_provider.remote.dto.AuthenticationResponseDto;
+import com.piotrgrochowiecki.eriderent_identity_provider.remote.dto.UserManagementResponseDto;
 import com.piotrgrochowiecki.eriderent_identity_provider.infrastructure.JwtTokenUtil;
 import com.piotrgrochowiecki.eriderent_identity_provider.domain.model.User;
 import lombok.AllArgsConstructor;

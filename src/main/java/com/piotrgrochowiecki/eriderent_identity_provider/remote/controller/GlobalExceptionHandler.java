@@ -1,6 +1,6 @@
-package com.piotrgrochowiecki.eriderent_identity_provider.api.controller;
+package com.piotrgrochowiecki.eriderent_identity_provider.remote.controller;
 
-import com.piotrgrochowiecki.eriderent_identity_provider.api.dto.RuntimeExceptionDto;
+import com.piotrgrochowiecki.eriderent_identity_provider.remote.dto.RuntimeExceptionDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
