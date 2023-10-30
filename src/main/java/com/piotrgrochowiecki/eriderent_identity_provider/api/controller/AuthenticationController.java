@@ -2,8 +2,8 @@ package com.piotrgrochowiecki.eriderent_identity_provider.api.controller;
 
 import com.piotrgrochowiecki.eriderent_identity_provider.api.dto.AuthenticationResponseDto;
 import com.piotrgrochowiecki.eriderent_identity_provider.api.dto.UserManagementResponseDto;
-import com.piotrgrochowiecki.eriderent_identity_provider.domain.JwtTokenUtil;
-import com.piotrgrochowiecki.eriderent_identity_provider.domain.User;
+import com.piotrgrochowiecki.eriderent_identity_provider.infrastructure.JwtTokenUtil;
+import com.piotrgrochowiecki.eriderent_identity_provider.domain.model.User;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;

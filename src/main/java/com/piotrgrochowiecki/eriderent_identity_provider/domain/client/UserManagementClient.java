@@ -1,6 +1,6 @@
 package com.piotrgrochowiecki.eriderent_identity_provider.domain.client;
 
-import com.piotrgrochowiecki.eriderent_identity_provider.domain.User;
+import com.piotrgrochowiecki.eriderent_identity_provider.domain.model.User;
 import org.springframework.lang.Nullable;
 
 public interface UserManagementClient {

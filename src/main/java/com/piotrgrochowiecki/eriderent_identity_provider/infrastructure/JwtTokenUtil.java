@@ -1,5 +1,6 @@
-package com.piotrgrochowiecki.eriderent_identity_provider.domain;
+package com.piotrgrochowiecki.eriderent_identity_provider.infrastructure;
 
+import com.piotrgrochowiecki.eriderent_identity_provider.domain.model.User;
 import io.jsonwebtoken.Jwts;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;

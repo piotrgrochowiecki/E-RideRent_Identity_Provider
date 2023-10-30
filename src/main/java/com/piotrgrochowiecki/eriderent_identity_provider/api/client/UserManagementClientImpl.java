@@ -2,7 +2,7 @@ package com.piotrgrochowiecki.eriderent_identity_provider.api.client;
 
 import com.piotrgrochowiecki.eriderent_identity_provider.api.mapper.Mapper;
 import com.piotrgrochowiecki.eriderent_identity_provider.api.dto.UserManagementResponseDto;
-import com.piotrgrochowiecki.eriderent_identity_provider.domain.User;
+import com.piotrgrochowiecki.eriderent_identity_provider.domain.model.User;
 import com.piotrgrochowiecki.eriderent_identity_provider.domain.client.UserManagementClient;
 import lombok.AllArgsConstructor;
 import org.springframework.lang.Nullable;

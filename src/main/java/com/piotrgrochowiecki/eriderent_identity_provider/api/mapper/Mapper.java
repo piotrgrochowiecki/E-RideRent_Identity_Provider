@@ -1,7 +1,7 @@
 package com.piotrgrochowiecki.eriderent_identity_provider.api.mapper;
 
 import com.piotrgrochowiecki.eriderent_identity_provider.api.dto.UserManagementResponseDto;
-import com.piotrgrochowiecki.eriderent_identity_provider.domain.User;
+import com.piotrgrochowiecki.eriderent_identity_provider.domain.model.User;
 import org.springframework.stereotype.Component;
 
 @Component

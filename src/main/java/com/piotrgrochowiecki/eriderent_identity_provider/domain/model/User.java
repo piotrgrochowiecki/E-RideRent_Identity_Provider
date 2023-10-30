@@ -1,4 +1,4 @@
-package com.piotrgrochowiecki.eriderent_identity_provider.domain;
+package com.piotrgrochowiecki.eriderent_identity_provider.domain.model;
 
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;

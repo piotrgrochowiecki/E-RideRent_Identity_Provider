@@ -1,4 +1,4 @@
-package com.piotrgrochowiecki.eriderent_identity_provider.domain;
+package com.piotrgrochowiecki.eriderent_identity_provider.infrastructure;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

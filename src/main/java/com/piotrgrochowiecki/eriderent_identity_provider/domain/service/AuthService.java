@@ -1,4 +1,4 @@
-package com.piotrgrochowiecki.eriderent_identity_provider.domain;
+package com.piotrgrochowiecki.eriderent_identity_provider.domain.service;
 
 import com.piotrgrochowiecki.eriderent_identity_provider.domain.client.UserManagementClient;
 import lombok.AllArgsConstructor;
