@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/internal/auth/")
+@RequestMapping("/api/v1/internal/authentication/")
 @AllArgsConstructor
 public class AuthenticationController {
 
     private final AuthenticationManager authenticationManager;
     private final JwtTokenUtil jwtTokenUtil;
 
-    @PostMapping("login")
+    @PostMapping("authenticate")
     public ResponseEntity<?> login(@RequestBody UserManagementResponseDto userDto) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(userDto.email(), userDto.password()));
