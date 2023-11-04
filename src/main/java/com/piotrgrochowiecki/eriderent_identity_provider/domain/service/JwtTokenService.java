@@ -1,4 +1,4 @@
-package com.piotrgrochowiecki.eriderent_identity_provider.infrastructure;
+package com.piotrgrochowiecki.eriderent_identity_provider.domain.service;
 
 import com.piotrgrochowiecki.eriderent_identity_provider.domain.model.User;
 import io.jsonwebtoken.Jwts;
@@ -12,7 +12,7 @@ import java.security.Key;
 import java.util.Date;
 
 @Component
-public class JwtTokenUtil {
+public class JwtTokenService {
 
     private static final long EXPIRE_DURATION_MILLISECONDS = 60 * 60 * 1000; //1 hour
     @Value("${app.jwt.secret}")
