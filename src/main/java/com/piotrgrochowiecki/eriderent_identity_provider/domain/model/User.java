@@ -9,7 +9,8 @@ import java.util.Collection;
 @Builder
 public record User(String uuid,
                    String email,
-                   String password) implements UserDetails {
+                   String password,
+                   Role role) implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
