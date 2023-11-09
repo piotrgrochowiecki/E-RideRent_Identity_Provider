@@ -31,7 +31,9 @@ public class AuthenticationService {
         final String[] values = credentials.split(":", 2);
 
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(values[0], values[1]));
+                new UsernamePasswordAuthenticationToken(values[0], values[1])); //TODO spróbować podzielić na dwie metody:
+        //TODO pierwsza powinna sprawdzić login i hasło bez udziału Spring Security, tak aby wszystko działo się jawnie
+        //TODO druga nadaje token
 
         User user = (User) authentication.getPrincipal();
 
