@@ -1,21 +1,23 @@
 package com.piotrgrochowiecki.eriderent_identity_provider.domain.service;
 
+import com.piotrgrochowiecki.eriderent_identity_provider.configuration.PasswordUtils;
+import com.piotrgrochowiecki.eriderent_identity_provider.domain.client.UserManagementClientService;
+import com.piotrgrochowiecki.eriderent_identity_provider.domain.exception.BadCredentialsRuntimeException;
+import com.piotrgrochowiecki.eriderent_identity_provider.domain.exception.NotFoundRuntimeException;
 import com.piotrgrochowiecki.eriderent_identity_provider.domain.model.User;
 import lombok.AllArgsConstructor;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class AuthenticationService {
 
-    private final AuthenticationManager authenticationManager;
     private final JwtTokenService jwtTokenService;
+    private final UserManagementClientService userManagementClientService;
 
     public String authenticate(String authenticationHeader) {
 
@@ -28,16 +30,27 @@ public class AuthenticationService {
 
         String credentials = new String(credentialsDecoded, StandardCharsets.UTF_8); //credentials = "username:password"
 
-        final String[] values = credentials.split(":", 2);
+        final String[] credentialsArr = credentials.split(":", 2);
+        String userEmailFromHeader = credentialsArr[0];
+        String passwordFromHeader = credentialsArr[1];
 
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(values[0], values[1])); //TODO spróbować podzielić na dwie metody:
-        //TODO pierwsza powinna sprawdzić login i hasło bez udziału Spring Security, tak aby wszystko działo się jawnie
-        //TODO druga nadaje token
+        User authenticatedUser = getAuthenticatedUser(userEmailFromHeader, passwordFromHeader);
 
-        User user = (User) authentication.getPrincipal();
+        return jwtTokenService.generateAccessToken(authenticatedUser);
+    }
 
-        return jwtTokenService.generateAccessToken(user);
+    private User getAuthenticatedUser(String userEmailFromHeader, String passwordFromHeader) {
+        Optional<User> userOptional = userManagementClientService.getByEmail(userEmailFromHeader);
+        if (userOptional.isEmpty()) {
+            throw new NotFoundRuntimeException(userEmailFromHeader);
+        }
+        User user = userOptional.get();
+        if (PasswordUtils.isPasswordValid(passwordFromHeader, user.password())) {
+            return user;
+        } else {
+            throw new BadCredentialsRuntimeException();
+        }
+
     }
 
 }

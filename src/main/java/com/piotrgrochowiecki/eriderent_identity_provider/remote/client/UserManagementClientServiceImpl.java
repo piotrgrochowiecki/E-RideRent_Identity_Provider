@@ -3,7 +3,7 @@ package com.piotrgrochowiecki.eriderent_identity_provider.remote.client;
 import com.piotrgrochowiecki.eriderent_identity_provider.remote.mapper.UserMapper;
 import com.piotrgrochowiecki.eriderent_identity_provider.remote.dto.UserManagementResponseDto;
 import com.piotrgrochowiecki.eriderent_identity_provider.domain.model.User;
-import com.piotrgrochowiecki.eriderent_identity_provider.domain.client.UserManagementClient;
+import com.piotrgrochowiecki.eriderent_identity_provider.domain.client.UserManagementClientService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ import java.util.Optional;
 
 
 @Service
-public class UserManagementClientImpl implements UserManagementClient {
+public class UserManagementClientServiceImpl implements UserManagementClientService {
 
     @Value("${url.userManagement}")
     private String USER_MANAGEMENT_URL;
@@ -25,7 +25,7 @@ public class UserManagementClientImpl implements UserManagementClient {
     private final UserMapper userMapper;
     private final WebClient userManagementClient;
 
-    public UserManagementClientImpl(UserMapper userMapper, WebClient userManagementClient) {
+    public UserManagementClientServiceImpl(UserMapper userMapper, WebClient userManagementClient) {
         this.userMapper = userMapper;
         this.userManagementClient = userManagementClient;
     }
