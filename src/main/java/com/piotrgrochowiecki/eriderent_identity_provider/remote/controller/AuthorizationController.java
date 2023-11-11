@@ -24,7 +24,7 @@ public class AuthorizationController {
                     .header(HttpHeaders.AUTHORIZATION, authToken)
                     .build();
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+            return ResponseEntity.status(HttpStatus.FORBIDDEN)
                     .header(HttpHeaders.AUTHORIZATION, authToken)
                     .build();
         }
