@@ -15,8 +15,6 @@ public class AuthorizationService {
     private final List<String> customerAllowedEndpoints = List.of("api/user/uuid/",
                                                                   "api/v1/internal/user/create");
 
-    //TODO czy nie rozdzielić kontrolerów i endpointów na np. "api/v1/internal/customer/user/..." i "api/v1/internal/admin/user/..." dla prostszej autoryzacji???
-
     public boolean isAuthorized(String token, String url) {
         Role userRole = jwtTokenService.extractRole(token);
 
@@ -25,6 +23,7 @@ public class AuthorizationService {
                        .anyMatch(url::contains);
 
     }
-
+//TODO zastanowić się nad utworzeniem javowej klasy Endpoint z url i metodą. Powstaną dwie listy obiektów, dla customer i dla admina.
+// Następnie przy żądaniu o dostęp porównać przychodzącą rolę i url. Na tej podstawie udzielić lub nie udzielić dostępu.
 
 }
