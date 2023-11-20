@@ -12,18 +12,28 @@ public class AuthorizationService {
 
     private final JwtTokenService jwtTokenService;
 
-    private final List<String> customerAllowedEndpoints = List.of("api/user/uuid/",
-                                                                  "api/v1/internal/user/create");
+    private final List<Endpoint> customerAllowedEndpoints = Endpoint.customerAllowedEndpoints;
 
-    public boolean isAuthorized(String token, String url) {
+    public boolean isAuthorized(String token, String url, String httpMethod) {
         Role userRole = jwtTokenService.extractRole(token);
 
-        return userRole.equals(Role.CUSTOMER) &&
-               customerAllowedEndpoints.stream()
-                       .anyMatch(url::contains);
-
+        if (userRole.equals(Role.CUSTOMER) &&
+            customerAllowedEndpoints.stream()
+                .anyMatch(endpoint -> endpoint.getUri().contains(url)
+                                      && endpoint.getMethod()
+                        .toString()
+                        .toUpperCase()
+                        .equals(httpMethod))) {
+            return true;
+        }
+        return userRole.equals(Role.ADMIN) &&
+               Endpoint.adminAllowedEndpoints.stream()
+                       .anyMatch(endpoint -> url.contains(endpoint.getUri()) &&
+                                             endpoint.getMethod()
+                                                     .toString()
+                                                     .toUpperCase()
+                                                     .equals(httpMethod));
+        //TODO przerzucić te sprawdzenia do jednej prywatnej metod: w parametrze przekazywać listę oraz endpoint
     }
-//TODO zastanowić się nad utworzeniem javowej klasy Endpoint z url i metodą. Powstaną dwie listy obiektów, dla customer i dla admina.
-// Następnie przy żądaniu o dostęp porównać przychodzącą rolę i url. Na tej podstawie udzielić lub nie udzielić dostępu.
 
 }

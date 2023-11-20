@@ -18,7 +18,7 @@ public class AuthorizationController {
     @PostMapping("authorize")
     public ResponseEntity<?> authorize(@RequestHeader(value = HttpHeaders.AUTHORIZATION) String authToken,
                                        @RequestBody AuthorizationRequestUrlDto authorizationRequestUrlDto) {
-        boolean isAuthorized = authorizationService.isAuthorized(authToken, authorizationRequestUrlDto.url());
+        boolean isAuthorized = authorizationService.isAuthorized(authToken, authorizationRequestUrlDto.url(), authorizationRequestUrlDto.httpMethod());
         if (isAuthorized) {
             return ResponseEntity.ok()
                     .header(HttpHeaders.AUTHORIZATION, authToken)
