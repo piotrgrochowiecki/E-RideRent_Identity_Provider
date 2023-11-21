@@ -11,14 +11,13 @@ import java.util.List;
 public class AuthorizationService {
 
     private final JwtTokenService jwtTokenService;
-
-    private final List<Endpoint> customerAllowedEndpoints = Endpoint.customerAllowedEndpoints;
+    private final EndpointList endpointList;
 
     public boolean isAuthorized(String token, String url, String httpMethod) {
         Role userRole = jwtTokenService.extractRole(token);
 
         if (userRole.equals(Role.CUSTOMER) &&
-            customerAllowedEndpoints.stream()
+            endpointList.getCustomerAllowedEndpoints().stream()
                 .anyMatch(endpoint -> endpoint.getUri().contains(url)
                                       && endpoint.getMethod()
                         .toString()
@@ -27,7 +26,7 @@ public class AuthorizationService {
             return true;
         }
         return userRole.equals(Role.ADMIN) &&
-               Endpoint.adminAllowedEndpoints.stream()
+               endpointList.getAdminAllowedEndpoints().stream()
                        .anyMatch(endpoint -> url.contains(endpoint.getUri()) &&
                                              endpoint.getMethod()
                                                      .toString()
