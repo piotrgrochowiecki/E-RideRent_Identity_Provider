@@ -3,14 +3,12 @@ package com.piotrgrochowiecki.eriderent_identity_provider.domain.service;
 import com.piotrgrochowiecki.eriderent_identity_provider.configuration.PasswordUtils;
 import com.piotrgrochowiecki.eriderent_identity_provider.domain.client.UserManagementClientService;
 import com.piotrgrochowiecki.eriderent_identity_provider.domain.exception.BadCredentialsRuntimeException;
-import com.piotrgrochowiecki.eriderent_identity_provider.domain.exception.NotFoundRuntimeException;
 import com.piotrgrochowiecki.eriderent_identity_provider.domain.model.User;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -21,8 +19,7 @@ public class AuthenticationService {
 
     public String authenticate(String authenticationHeader) {
 
-        String base64Credentials = authenticationHeader.substring("Basic"
-                                                                          .length())
+        String base64Credentials = authenticationHeader.substring("Basic".length())
                 .trim(); // removal of "Basic" word from header value, it comes in a form "Basic dXNlcm5hbWU6cGFzc3dvcmQ="
 
         byte[] credentialsDecoded = Base64.getDecoder()
@@ -40,17 +37,11 @@ public class AuthenticationService {
     }
 
     private User getAuthenticatedUser(String userEmailFromHeader, String passwordFromHeader) {
-        Optional<User> userOptional = userManagementClientService.getByEmail(userEmailFromHeader);
-        if (userOptional.isEmpty()) {
-            throw new NotFoundRuntimeException(userEmailFromHeader);
-        }
-        User user = userOptional.get();
+        User user = userManagementClientService.getByEmail(userEmailFromHeader)
+                .orElseThrow(BadCredentialsRuntimeException::new);
         if (PasswordUtils.isPasswordValid(passwordFromHeader, user.password())) {
             return user;
-        } else {
-            throw new BadCredentialsRuntimeException();
         }
-
+        throw new BadCredentialsRuntimeException();
     }
-
 }
